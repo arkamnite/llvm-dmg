@@ -1,6 +1,6 @@
 # Rust's fork of LLVM
 
-This repository is a Rust-specifc fork of LLVM. This is used as a submodule in
+This repository is a Rust-specific fork of LLVM. This is used as a submodule in
 the https://github.com/rust-lang/rust repository. The Rust repository is always
 pinned to a branch of this repository, and the `master` branch of this
 repository is not used.
