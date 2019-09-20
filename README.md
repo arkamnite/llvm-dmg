@@ -8,3 +8,7 @@ repository is not used.
 Despite this being a "fork" it's more of just a place where we can easily tweak
 the LLVM source for Rust's own build. All patches should by default go upstream
 first, and then we can cherry-pick them onto our branches if necessary.
+
+To learn more about updating LLVM in the Rust compiler, consult the
+[documentation for doing so in
+`rustc-guide`](https://rust-lang.github.io/rustc-guide/codegen/updating-llvm.html)
