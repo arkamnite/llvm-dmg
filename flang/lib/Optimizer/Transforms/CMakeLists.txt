@@ -1,0 +1,40 @@
+add_flang_library(FIRTransforms
+  AbstractResult.cpp
+  AffinePromotion.cpp
+  AffineDemotion.cpp
+  AnnotateConstant.cpp
+  CharacterConversion.cpp
+  ControlFlowConverter.cpp
+  ArrayValueCopy.cpp
+  ExternalNameConversion.cpp
+  MemoryAllocation.cpp
+  StackArrays.cpp
+  MemRefDataFlowOpt.cpp
+  SimplifyRegionLite.cpp
+  AlgebraicSimplification.cpp
+  SimplifyIntrinsics.cpp
+  AddDebugFoundation.cpp
+  PolymorphicOpConversion.cpp
+  OpenACC/OpenACCDataOperandConversion.cpp
+  LoopVersioning.cpp
+
+  DEPENDS
+  FIRDialect
+  FIROptTransformsPassIncGen
+
+  LINK_LIBS
+  FIRBuilder
+  FIRCodeGen
+  FIRDialect
+  FIRDialectSupport
+  FIRSupport
+  HLFIRDialect
+  MLIRAffineUtils
+  MLIRFuncDialect
+  MLIRLLVMDialect
+  MLIRLLVMCommonConversion
+  MLIRMathTransforms
+  MLIROpenACCDialect
+  MLIROpenACCToLLVMIRTranslation
+  MLIROpenMPDialect
+)
