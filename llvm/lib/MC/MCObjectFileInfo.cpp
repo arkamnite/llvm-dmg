@@ -1101,6 +1101,12 @@ MCSection *MCObjectFileInfo::getDwarfComdatSection(const char *Name,
     report_fatal_error("Cannot get DWARF comdat section for this object file "
                        "format: not implemented.");
     break;
+  case Triple::DMG:
+    llvm_unreachable("DMG is not yet implemented");
+    break;
+  case Triple::RGBASM:
+    llvm_unreachable("RGBASM is not yet implemented");
+    break;
   }
   llvm_unreachable("Unknown ObjectFormatType");
 }

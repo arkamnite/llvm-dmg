@@ -1,0 +1,12 @@
+#ifndef LLVM_LIB_TARGET_GAMEBOY_TARGETINFO_GAMEBOYTARGETINFO_H
+#define LLVM_LIB_TARGET_GAMEBOY_TARGETINFO_GAMEBOYTARGETINFO_H
+
+namespace llvm {
+
+class Target;
+
+Target &getTheGameBoyTarget();
+
+}
+
+#endif

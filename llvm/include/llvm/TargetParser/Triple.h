@@ -53,6 +53,7 @@ public:
     aarch64_32,     // AArch64 (little endian) ILP32: aarch64_32
     arc,            // ARC: Synopsys ARC
     avr,            // AVR: Atmel AVR microcontroller
+    gameboy,        // Game Boy: The Nintendo Game Boy family of consoles
     bpfel,          // eBPF or extended BPF or 64-bit BPF (little endian)
     bpfeb,          // eBPF or extended BPF or 64-bit BPF (big endian)
     csky,           // CSKY: csky
@@ -179,6 +180,7 @@ public:
     AMD,
     Mesa,
     SUSE,
+    Sharp,
     OpenEmbedded,
     LastVendorType = OpenEmbedded
   };
@@ -288,6 +290,8 @@ public:
     SPIRV,
     Wasm,
     XCOFF,
+    DMG, // Custom Game Boy object format
+    RGBASM,
   };
 
 private:

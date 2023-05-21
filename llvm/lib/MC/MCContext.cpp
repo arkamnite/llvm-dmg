@@ -109,6 +109,12 @@ MCContext::MCContext(const Triple &TheTriple, const MCAsmInfo *mai,
   case Triple::SPIRV:
     Env = IsSPIRV;
     break;
+  case Triple::DMG:
+    llvm_unreachable("DMG is not yet implemented");
+    break;
+  case Triple::RGBASM:
+    llvm_unreachable("RGBASM is not yet implemented");
+    break;
   case Triple::UnknownObjectFormat:
     report_fatal_error("Cannot initialize MC for unknown object file format.");
     break;

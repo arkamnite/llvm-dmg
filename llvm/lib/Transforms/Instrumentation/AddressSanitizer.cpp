@@ -1922,6 +1922,12 @@ StringRef ModuleAddressSanitizer::getGlobalMetadataSection() const {
   case Triple::DXContainer:
     report_fatal_error(
         "ModuleAddressSanitizer not implemented for object file format");
+  case Triple::DMG:
+    llvm_unreachable("DMG is not yet implemented");
+    break;
+  case Triple::RGBASM:
+    llvm_unreachable("RGBASM is not yet implemented");
+    break;
   case Triple::UnknownObjectFormat:
     break;
   }

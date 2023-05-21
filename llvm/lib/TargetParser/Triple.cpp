@@ -39,6 +39,7 @@ StringRef Triple::getArchTypeName(ArchType Kind) {
   case csky:           return "csky";
   case dxil:           return "dxil";
   case hexagon:        return "hexagon";
+  case gameboy:        return "gameboy";
   case hsail64:        return "hsail64";
   case hsail:          return "hsail";
   case kalimba:        return "kalimba";
@@ -196,6 +197,7 @@ StringRef Triple::getVendorTypeName(VendorType Kind) {
   case PC: return "pc";
   case SCEI: return "scei";
   case SUSE: return "suse";
+  case Sharp: return "sharp";
   }
 
   llvm_unreachable("Invalid VendorType!");
@@ -308,6 +310,8 @@ StringRef Triple::getObjectFormatTypeName(ObjectFormatType Kind) {
   case XCOFF: return "xcoff";
   case DXContainer: return "dxcontainer";
   case SPIRV: return "spirv";
+  case RGBASM: return "rgbasm";
+  case DMG: return "dmg";
   }
   llvm_unreachable("unknown object format type");
 }
@@ -395,6 +399,11 @@ Triple::ArchType Triple::getArchTypeForLLVMName(StringRef Name) {
     .Case("loongarch64", loongarch64)
     .Case("dxil", dxil)
     .Case("xtensa", xtensa)
+    // Game Boy is known by several different names
+    .Case("gameboy", gameboy)
+    .Case("dmg", gameboy)
+    .Case("gb", gameboy)
+    .Case("cgb", gameboy)
     .Default(UnknownArch);
 }
 
@@ -537,6 +546,7 @@ static Triple::ArchType parseArch(StringRef ArchName) {
     .Case("loongarch64", Triple::loongarch64)
     .Case("dxil", Triple::dxil)
     .Case("xtensa", Triple::xtensa)
+    .Cases("gameboy", "dmg", "gb", "cgb", Triple::gameboy)
     .Default(Triple::UnknownArch);
 
   // Some architectures require special parsing logic just to compute the
@@ -568,6 +578,7 @@ static Triple::VendorType parseVendor(StringRef VendorName) {
     .Case("amd", Triple::AMD)
     .Case("mesa", Triple::Mesa)
     .Case("suse", Triple::SUSE)
+    .Cases("sharp", "nintendo", Triple::Sharp)
     .Case("oe", Triple::OpenEmbedded)
     .Default(Triple::UnknownVendor);
 }
@@ -673,6 +684,8 @@ static Triple::ObjectFormatType parseFormat(StringRef EnvironmentName) {
       .EndsWith("macho", Triple::MachO)
       .EndsWith("wasm", Triple::Wasm)
       .EndsWith("spirv", Triple::SPIRV)
+      .EndsWith("rgbasm", Triple::RGBASM)
+      .EndsWith("dmg", Triple::DMG)
       .Default(Triple::UnknownObjectFormat);
 }
 
@@ -873,6 +886,10 @@ static Triple::ObjectFormatType getDefaultFormat(const Triple &T) {
 
   case Triple::dxil:
     return Triple::DXContainer;
+
+  // By default, return the custom object file format.
+  case Triple::gameboy:
+    return Triple::DMG;
   }
   llvm_unreachable("unknown architecture");
 }
@@ -1394,6 +1411,7 @@ static unsigned getArchPointerBitWidth(llvm::Triple::ArchType Arch) {
 
   case llvm::Triple::avr:
   case llvm::Triple::msp430:
+  case llvm::Triple::gameboy:
     return 16;
 
   case llvm::Triple::aarch64_32:
@@ -1481,6 +1499,7 @@ Triple Triple::get32BitArchVariant() const {
   case Triple::avr:
   case Triple::bpfeb:
   case Triple::bpfel:
+  case Triple::gameboy:
   case Triple::msp430:
   case Triple::systemz:
   case Triple::ve:
@@ -1561,6 +1580,7 @@ Triple Triple::get64BitArchVariant() const {
   case Triple::avr:
   case Triple::csky:
   case Triple::dxil:
+  case Triple::gameboy:
   case Triple::hexagon:
   case Triple::kalimba:
   case Triple::lanai:
@@ -1645,6 +1665,7 @@ Triple Triple::getBigEndianArchVariant() const {
   case Triple::amdil:
   case Triple::avr:
   case Triple::dxil:
+  case Triple::gameboy:
   case Triple::hexagon:
   case Triple::hsail64:
   case Triple::hsail:
@@ -1749,6 +1770,7 @@ bool Triple::isLittleEndian() const {
   case Triple::bpfel:
   case Triple::csky:
   case Triple::dxil:
+  case Triple::gameboy:
   case Triple::hexagon:
   case Triple::hsail64:
   case Triple::hsail:

@@ -561,6 +561,10 @@ public:
                                      bool DWARFMustBeAtTheEnd) const {
     MCStreamer *S = nullptr;
     switch (T.getObjectFormat()) {
+    case Triple::DMG:
+      llvm_unreachable("DMG object format implementation incomplete");
+    case Triple::RGBASM:
+      llvm_unreachable("RGBASM object format implementation incomplete");
     case Triple::UnknownObjectFormat:
       llvm_unreachable("Unknown object format");
     case Triple::COFF:
