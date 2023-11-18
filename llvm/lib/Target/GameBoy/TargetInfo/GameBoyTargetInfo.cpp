@@ -8,5 +8,5 @@ Target &llvm::getTheGameBoyTarget() {
 }
 
 extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeGameBoyTargetInfo() {
-    RegisterTarget<Triple::gameboy, /*HasJIT=*/false> X(getTheGameBoyTarget(), "gameboy", "GameBoy", "GameBoy");
+    RegisterTarget<Triple::gameboy, /*HasJIT=*/false> X(getTheGameBoyTarget(), "gameboy", "Nintendo Game Boy", "GAME BOY");
 }

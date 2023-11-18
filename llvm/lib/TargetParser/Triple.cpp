@@ -863,6 +863,7 @@ static Triple::ObjectFormatType getDefaultFormat(const Triple &T) {
   case Triple::ve:
   case Triple::xcore:
   case Triple::xtensa:
+  case Triple::gameboy:
     return Triple::ELF;
 
   case Triple::ppc64:
@@ -886,10 +887,6 @@ static Triple::ObjectFormatType getDefaultFormat(const Triple &T) {
 
   case Triple::dxil:
     return Triple::DXContainer;
-
-  // By default, return the custom object file format.
-  case Triple::gameboy:
-    return Triple::DMG;
   }
   llvm_unreachable("unknown architecture");
 }
