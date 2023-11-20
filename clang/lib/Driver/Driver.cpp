@@ -6151,6 +6151,9 @@ const ToolChain &Driver::getToolChain(const ArgList &Args,
       // Of these targets, Hexagon is the only one that might have
       // an OS of Linux, in which case it got handled above already.
       switch (Target.getArch()) {
+      case llvm::Triple::gameboy:
+        TC = std::make_unique<toolchains::BareMetal>(*this, Target, Args);
+        break;
       case llvm::Triple::tce:
         TC = std::make_unique<toolchains::TCEToolChain>(*this, Target, Args);
         break;
