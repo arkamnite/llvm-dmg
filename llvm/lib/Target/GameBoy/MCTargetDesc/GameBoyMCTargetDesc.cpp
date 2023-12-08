@@ -12,8 +12,8 @@ using namespace llvm;
 #define ENABLE_INSTR_PREDICATE_VERIFIER
 #include "GameBoyGenInstrInfo.inc"
 
-// #define GET_SUBTARGETINFO_MC_DESC
-// #include "GameBoyGenSubtargetInfo.inc"
+#define GET_SUBTARGETINFO_MC_DESC
+#include "GameBoyGenSubtargetInfo.inc"
 
 #define GET_REGINFO_MC_DESC
 #include "GameBoyGenRegisterInfo.inc"

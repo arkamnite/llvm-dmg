@@ -7,7 +7,7 @@
 
 #include "llvm/CodeGen/TargetLoweringObjectFileImpl.h"
 
-using namespace llvm;
+namespace llvm {
 
 static const char *GameBoyDataLayout =
     "e-p:16:8-i8:8-i16:16-i32:16-i64:16-f32:8-f64:8-n8-a:8";
@@ -23,8 +23,8 @@ GameBoyTargetMachine::GameBoyTargetMachine( const Target &T, const Triple &TT,
                         RM.value_or(Reloc::Static),
                         getEffectiveCodeModel(CM, CodeModel::Small),
                         OL),
-    TLOF(std::make_unique<TargetLoweringObjectFileELF>())
-    // Subtarget(TT, std::string(CPU), std::string(FS), *this, false),
+    TLOF(std::make_unique<TargetLoweringObjectFileELF>()),
+    SubTarget(TT, std::string(CPU), std::string(FS), *this, false)
 {
 
 }
@@ -64,6 +64,10 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeGameBoyTarget() {
   RegisterTargetMachine<GameBoyTargetMachine> X(getTheGameBoyTarget());
 
   // TODO: Enable this pass.
-  // PassRegistry &PR = *PassRegistry::getPassRegistry();
-  // initializeGameBoyDAGToDAGISelPass(PR);
+  PassRegistry &PR = *PassRegistry::getPassRegistry();
+  initializeGameBoyExpandPseudoPass(PR);
+  initializeGameBoyShiftExpandPass(PR);
+  initializeGameBoyDAGToDAGISelPass(PR);
 }
+
+} // end namespace llvm
